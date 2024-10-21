@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const User = require("../Models/user");
 const { createHmac } = require("crypto");
-const { setToken } = require("../Utilities/token")
+const { setToken,getUser } = require("../Utilities/token")
 const isAuthenticated=require("../MIddlewares/protected")
 const userRouter = Router();
 const path=require("path")
@@ -11,7 +11,7 @@ userRouter.route("")
        const name = req.user ? req.user.firstname : null;
        console.log(name);
        
-        res.render("Home", {name});
+        res.render("Home", {name,refresh:null});
     })
 
 
@@ -52,7 +52,7 @@ userRouter.route("/Login")
     req.app.locals.userId = user._id;
     res.cookie("sessionId", token).redirect("/");
     } catch (error) {
-    console.error("Signin error:", error.message);
+    console.error(" error:", error.message);
     res.render("Login", {
         name: "USER",
         error: "An unexpected error occurred. Please try again."
@@ -73,7 +73,7 @@ res.render("Register", { name, error: null });
 try {
     const { firstname, secondname, username, password } = req.body;
 
-    // Check if username already exists
+    // Check for this username int he data base if it already exist?
     const existingUser = await User.findOne({ username });
     if (existingUser) {
     return res.render("Register", {
@@ -81,14 +81,12 @@ try {
         error: "Username already taken. Please choose another one."
     });
     }
-
-    // Create new user
     const user = await User.create({ firstname, secondname, username, password });
     const token = setToken(user);
     req.app.locals.userId = user._id;
     res.cookie("sessionId", token).redirect("/");
 } catch (error) {
-    console.error("Register error:", error.message);
+    console.error("Register :", error.message);
     res.render("Register", {
     name: "Register Here",
     error: "An unexpected error occurred. Please try again."
@@ -96,7 +94,28 @@ try {
 }
 });
 
+userRouter.route("/Refresh")
+  .get((req, res) => {
+    try {
+      const sessionId = req.cookies.sessionId;
+      if (!sessionId) {
+        return res.status(401).send("sessionId missing");
+      }
+      const user = getUser(sessionId);
 
+      if (!user) {
+        return res.status(403).send("Invalid refresh token");
+      }
+      const name = req.user ? req.user.firstname : null;
+      const newAccessToken = setToken(user);
+      res.cookie("sessionId", newAccessToken);
+      res.render("Home",{name,refresh:"You get a new session token"});
+      //res.send("Token refreshed successfully");
+    } catch (error) {
+      console.error("Refresh error:", error.message);
+      res.status(500).send("Server error");
+    }
+  });
 
 
 userRouter.route('/logout')

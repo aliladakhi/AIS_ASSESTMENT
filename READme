@@ -1,0 +1,21 @@
+Instalation
+    1:-Clone this git repo
+    2:-Make sure u have latest version of npm and nodejs
+    3:-npm install in the git dir
+    4:-Setup a env
+        PORT=8001
+        MONGO_URL="mongodb://127.0.0.1:27017/Assestment"
+        SECRET_KEY="AIS ASSESTMENT"
+    5:-npm start or npm run dev (for development)
+
+Usage
+
+    Register: Navigate to /Register to create a new user account.
+    Login: Navigate to /Login to log in with your username and password.
+    Refresh: Navigate to /Refresh to get a new Sessionid 
+    Logout: Access /logout to log out of the current session.
+    /: After logging in, you'll be redirected to the home page.
+    /protected:If the user is authenticated, it reads userId from app.locals and returns it in the JSON response.
+
+
+It has a jwt token based session system

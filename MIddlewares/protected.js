@@ -1,6 +1,6 @@
 function isAuthenticated(req, res, next) {
     if (!req.app.locals.userId) {
-      return res.status(401).json({ error: "Unauthorized access" });
+      return res.status(401).json({ error: "Register First" });
     }
     next();
   }

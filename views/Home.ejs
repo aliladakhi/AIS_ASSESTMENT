@@ -58,11 +58,12 @@
   <body>
     <div class="container">
       <%- include("./partials/Nav",{name}) %>
-      <h1>Welcome, <%= name ? name : "USER" %>!</h1>
+      <h1>Welcome, <%= name ? name : "USER" %>!<br><%= refresh ? refresh : null %></h1>
       <p>
         <%= name 
           ? `Glad to see you, ${name} here.` 
-          : "Offo! You must register to access all features!" %>
+          : "Oh no, you must register!" 
+        %>
       </p>
       <% if (!name) { %>
         <a href="/Register" class="btn">Register Now</a>
