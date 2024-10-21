@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/Style') %>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: white; 
+        font-family: 'Arial', sans-serif;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+    </style>
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include("./partials/Nav",{name}) %>
+      <h1>Welcome, <%= name ? name : "USER" %>!</h1>
+      <p>
+        <%= name 
+          ? `Glad to see you, ${name} here.` 
+          : "Offo! You must register to access all features!" %>
+      </p>
+      <% if (!name) { %>
+        <a href="/Register" class="btn">Register Now</a>
+        <a href="/Login" class="btn">Login</a>
+      <% } %>
+    </div>
+  </body>
+</html>

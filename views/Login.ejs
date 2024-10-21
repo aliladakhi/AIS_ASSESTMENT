@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/Style') %>
+    <style>
+
+      .container {
+        margin: 10% auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
+    
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-family: 'Arial', sans-serif;
+      }
+    
+      .form-label {
+        font-weight: bold;
+      }
+    
+      .form-control {
+        padding: 0.5rem;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: white;
+        background-clip: padding-box;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+    
+      .form-control:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    
+      .btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+        border-radius: 5px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        transition: background-color 0.2s;
+        margin-top: 1rem;
+      }
+    
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    
+      .mb-3 {
+        margin-bottom: 1rem;
+      }
+    </style>
+    
+  <title>Login</title>
+</head>
+<body>
+    <%- include("./partials/Nav",{name}) %>
+    <div class="container">
+      <h2>Login Here</h2>
+    
+      <% if (error) { %>
+        <div class="alert alert-danger" role="alert">
+          <h3 style="color: red;"><%= error %></h3>
+        </div>
+      <% } %>
+    
+      <form action="/Login" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="username">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    
+</body>
+</html>
+
+
