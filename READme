@@ -1,3 +1,4 @@
+This is the AIS Assestment Backend
 Instalation
     1:-Clone this git repo
     2:-Make sure u have latest version of npm and nodejs
@@ -18,4 +19,7 @@ Usage
     /protected:If the user is authenticated, it reads userId from app.locals and returns it in the JSON response.
 
 
-It has a jwt token based session system
+It uses Jwt fro session management.
+It renders .ejs from server side
+Using Mongodb and mongoose for Data and DB managemnet 
+Making Server Using Express

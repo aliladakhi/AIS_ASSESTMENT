@@ -21,6 +21,7 @@
         max-width: 500px;
         width: 100%;
         text-align: center;
+
       }
 
       h1 {
@@ -58,7 +59,7 @@
   <body>
     <div class="container">
       <%- include("./partials/Nav",{name}) %>
-      <h1>Welcome, <%= name ? name : "USER" %>!<br><%= refresh ? refresh : null %></h1>
+      <h1>Welcome, <%= name ? name : "USER" %>!<br><span style="color: #0056b3;font-weight:300; "><%= refresh ? refresh : null %></span></h1>
       <p>
         <%= name 
           ? `Glad to see you, ${name} here.` 
@@ -71,4 +72,14 @@
       <% } %>
     </div>
   </body>
+  <script>
+    let ref_span = document.querySelector("span");
+  
+    if (ref_span.textContent.trim() !== "") {
+      setTimeout(() => {
+        ref_span.textContent = "";
+      }, 2000);
+    }
+  </script>
+  
 </html>

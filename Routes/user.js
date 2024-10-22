@@ -4,8 +4,6 @@ const { createHmac } = require("crypto");
 const { setToken,getUser } = require("../Utilities/token")
 const isAuthenticated=require("../MIddlewares/protected")
 const userRouter = Router();
-const path=require("path")
-
 userRouter.route("")
     .get((req,res)=>{
        const name = req.user ? req.user.firstname : null;
